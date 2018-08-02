@@ -486,6 +486,15 @@ class MessageContext(BaseContext):
         writer.add('}')
         writer.newline()
 
+        # serializedDataIgnoringErrors() func
+        writer.add('// NOTE: This method is intended for debugging purposes only.')
+        writer.add('@objc public func serializedDataIgnoringErrors() -> Data? {')
+        writer.push_indent()
+        writer.add('return try! self.serializedData()')
+        writer.pop_indent()
+        writer.add('}')
+        writer.newline()
+
         # serializedData() func
         writer.extend(('''
 @objc
@@ -684,7 +693,16 @@ public func serializedData() throws -> Data {
                 writer.pop_indent()
                 writer.add('}')
                 writer.newline()
-    
+
+        # buildIgnoringErrors() func
+        writer.add('// NOTE: This method is intended for debugging purposes only.')
+        writer.add('@objc public func buildIgnoringErrors() -> %s? {' % self.swift_name)
+        writer.push_indent()
+        writer.add('return try! self.build()')
+        writer.pop_indent()
+        writer.add('}')
+        writer.newline()
+
         # build() func
         writer.add('@objc public func build() throws -> %s {' % self.swift_name)
         writer.push_indent()
