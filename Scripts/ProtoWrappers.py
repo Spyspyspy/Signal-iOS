@@ -488,7 +488,7 @@ class MessageContext(BaseContext):
 
         # serializedDataIgnoringErrors() func
         writer.add('// NOTE: This method is intended for debugging purposes only.')
-        writer.add('@objc public func serializedDataIgnoringErrors() -> Data? {')
+        writer.add('@objc public func serializedDataIgnoringErrors() -> Data {')
         writer.push_indent()
         writer.add('return try! self.serializedData()')
         writer.pop_indent()
@@ -696,7 +696,7 @@ public func serializedData() throws -> Data {
 
         # buildIgnoringErrors() func
         writer.add('// NOTE: This method is intended for debugging purposes only.')
-        writer.add('@objc public func buildIgnoringErrors() -> %s? {' % self.swift_name)
+        writer.add('@objc public func buildIgnoringErrors() -> %s {' % self.swift_name)
         writer.push_indent()
         writer.add('return try! self.build()')
         writer.pop_indent()
